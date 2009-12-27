@@ -5,7 +5,7 @@
 
 Summary:	Extended internationalisation support
 Name:		apache-%{mod_name}
-Version:	1.0.2
+Version:	1.0.3
 Release:	%mkrel 1
 Group:		System/Servers
 License:	Apache License
@@ -99,4 +99,3 @@ fi
 %files devel
 %defattr(-,root,root)
 %attr(0644,root,root) %{_includedir}/mod_xml2enc.h
-
