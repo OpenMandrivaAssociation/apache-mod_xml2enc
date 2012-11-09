@@ -1,0 +1,5 @@
+sources:
+  "A29_mod_xml2enc.conf:"	25fc8d943a11c62a4d83a6f772590606b7dfa8e1
+  "mod_xml2enc.c:"	96b64856beeb17897e065cc88472dfb5b1ffc1c8
+  "mod_xml2enc.h:"	93a015ffb68508be754505cd8cebcd6ecd2bdb11
+  "README.mod_xml2enc:"	96898339e921cbd6b7a8cbdfdb37857cf8f163ab
