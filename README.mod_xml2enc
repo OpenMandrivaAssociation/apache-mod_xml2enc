@@ -1,0 +1,98 @@
+mod_xml2enc
+
+   mod_xml2enc is a transcoding module that can be used to extend the
+   internationalisation support of libxml2-based filter modules by
+   converting encoding before and/or after the filter has run. Thus an
+   unsupported input charset can be converted to UTF-8, and output can
+   also be converted to another charset if required.
+
+   Modules that you might use this with include:
+     * mod_proxy_html
+     * mod_accessibility
+     * mod_publisher
+     * mod_xml2
+     * mod_transform
+     * mod_xslt
+
+Usage
+
+   There are two usage scenarios:
+
+Filter modules enabled for mod_xml2enc
+
+   Modules such as mod_proxy_html version 3.1 and up use the
+   xml2enc_charset optional function to retrieve the charset argument to
+   pass to the libxml2 parser, and may use the xml2enc_filter optional
+   function to postprocess to another encoding. Using mod_xml2enc with an
+   enabled module, no configuration is necessary: the other module will
+   configure mod_xml2enc for you (though you may still want to customise
+   it using the configuration directives below).
+
+Non-enabled modules
+
+   To use it with a libxml2-based module that isn't explicitly enabled for
+   mod_xml2enc, you will have to configure the filter chain yourself. For
+   example, to use it with mod_publisher to improve the latter's i18n
+   support with HTML and XML, you could use
+FilterProvider iconv    xml2enc Content-Type $text/html
+FilterProvider iconv    xml2enc Content-Type $xml
+FilterProvider markup   markup-publisher Content-Type $text/html
+FilterProvider markup   markup-publisher Content-Type $xml
+FilterChain     iconv markup
+
+   mod_publisher will now support any character set supported by either
+   (or both) of libxml2 or apr_xlate/iconv.
+
+Programming API
+
+   Programmers writing libxml2-based filter modules are encouraged to
+   enable them for mod_xml2enc, to provide strong i18n support for your
+   users without reinventing the wheel. The programming API is exposed in
+   mod_xml2enc.h, and a usage example is mod_proxy_html.
+
+Configuration
+
+   The following configuration directives are available:
+
+   xml2EncDefault
+          Syntax xml2EncDefault name
+
+          This defines the default encoding to assume when absolutely no
+          charset information is available from the backend server. The
+          default value for this is ISO-8859-1, as specified in HTTP/1.0
+          and assumed in earlier modules.
+
+   xml2EncAlias
+          Syntax xml2EncAlias charset alias [alias ...]
+
+          This server-wide directive aliases one or more charset to
+          another charset. This enables encodings not recognised by
+          libxml2 to be handled internally by libxml2's charset support
+          using the translation table for a recognised charset. This
+          serves two purposes: to support character sets (or names) not
+          recognised either by libxml2 or iconv, and to skip conversion
+          for a charset where it is known to be unnecessary.
+
+   xml2StartParse
+          Syntax xml2StartParse element [elt*]
+
+          Specify that the markup parser should start at the first
+          instance of any of the elements specified. This can be used
+          where a broken backend inserts leading junk that messes up the
+          parser (example here). It should never be used for XML, nor
+          well-formed HTML.
+
+Post-Processing
+
+   There is currently no direct way to configure post-processing. Another
+   module can invoke post-processing to output a desired character set,
+   but a system administrator cannot do so directly.
+
+Availability
+
+   mod_xml2enc source code is available under the Apache License, Version
+   2.0. You'll need both mod_xml2enc.c and mod_xml2enc.h.
+
+   The current version is 1.0.2 (October 2009).
+
+   Up * Home * Contact * Webﬁing * Apache

@@ -6,7 +6,7 @@
 Summary:	Extended internationalisation support
 Name:		apache-%{mod_name}
 Version:	1.0.3
-Release:	%mkrel 6
+Release:	%mkrel 7
 Group:		System/Servers
 License:	Apache License
 URL:		http://apache.webthing.com/mod_xml2enc/
@@ -61,7 +61,7 @@ find . -type f|xargs file|grep 'text'|cut -d: -f1|xargs perl -p -i -e 's/\r//'
 head -40 %{mod_name}.c > LICENCE
 
 %build
-%{_sbindir}/apxs `xml2-config --cflags` `xml2-config --libs` %{ldflags} -c %{mod_name}.c
+%{_bindir}/apxs `xml2-config --cflags` `xml2-config --libs` %{ldflags} -c %{mod_name}.c
 
 %install
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
@@ -99,3 +99,33 @@ fi
 %files devel
 %defattr(-,root,root)
 %attr(0644,root,root) %{_includedir}/mod_xml2enc.h
+
+
+%changelog
+* Sat May 14 2011 Oden Eriksson <oeriksson@mandriva.com> 1.0.3-5mdv2011.0
++ Revision: 674432
+- rebuild
+
+* Mon May 02 2011 Oden Eriksson <oeriksson@mandriva.com> 1.0.3-4
++ Revision: 662781
+- mass rebuild
+
+* Sun Oct 24 2010 Oden Eriksson <oeriksson@mandriva.com> 1.0.3-3mdv2011.0
++ Revision: 588286
+- rebuild
+
+* Mon Mar 08 2010 Oden Eriksson <oeriksson@mandriva.com> 1.0.3-2mdv2010.1
++ Revision: 515841
+- rebuilt for apache-2.2.15
+
+* Sun Dec 27 2009 Oden Eriksson <oeriksson@mandriva.com> 1.0.3-1mdv2010.1
++ Revision: 482832
+- 1.0.3
+
+* Sun Oct 25 2009 Oden Eriksson <oeriksson@mandriva.com> 1.0.2-1mdv2010.0
++ Revision: 459195
+- import apache-mod_xml2enc
+
+
+* Sun Oct 25 2009 Oden Eriksson <oeriksson@mandriva.com> 1.0.2-1mdv2010.0
+- initial Mandriva package
