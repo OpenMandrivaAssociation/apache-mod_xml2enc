@@ -6,7 +6,7 @@
 Summary:	Extended internationalisation support
 Name:		apache-%{mod_name}
 Version:	1.0.3
-Release:	12
+Release:	13
 Group:		System/Servers
 License:	Apache License
 URL:		http://apache.webthing.com/mod_xml2enc/
