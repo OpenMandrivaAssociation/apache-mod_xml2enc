@@ -61,7 +61,7 @@ find . -type f|xargs file|grep 'text'|cut -d: -f1|xargs perl -p -i -e 's/\r//'
 head -40 %{mod_name}.c > LICENCE
 
 %build
-%{_bindir}/apxs `xml2-config --cflags` `xml2-config --libs` %{ldflags} -c %{mod_name}.c
+%{_bindir}/apxs `xml2-config --cflags` `xml2-config --libs` -c %{mod_name}.c
 
 %install
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
