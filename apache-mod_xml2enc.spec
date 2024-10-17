@@ -9,7 +9,7 @@ Version:	1.0.3
 Release:	19
 Group:		System/Servers
 License:	Apache License
-URL:		http://apache.webthing.com/mod_xml2enc/
+URL:		https://apache.webthing.com/mod_xml2enc/
 Source0:	http://apache.webthing.com/svn/apache/filters/mod_xml2enc.c
 Source1:	http://apache.webthing.com/svn/apache/filters/mod_xml2enc.h
 Source2:	README.mod_xml2enc
